@@ -1,0 +1,33 @@
+<div style="text-align: center">
+  <h1>Prueba técnica Cristóbal Donoso</h1>
+
+  <div style="display:flex; flex-direction: row; justify-content: space-around; ">
+    <%= form_tag todos_path, method: :post do %>
+      <label for="fname">Nombre TODO:</label>
+      <input type="text" id="fname" name="name">
+      <%= submit_tag("Crear") %>
+    <% end %>
+
+    <%= form_tag root_path, method: :get do %>
+      <label for="todo_filters">Selecciona un filtro:</label>
+      <select name="todo_filters" id="todo_filters">
+        <option value="all">Todos</option>
+        <option value="ready">Ready</option>
+        <option value="not_ready">Not Ready</option>
+      </select>
+      <%= submit_tag('Filtrar') %>
+    <% end %>
+  </div>
+
+  <%@todos.each do |todo|%>
+      <ul>
+        <%= form_tag post_update_todo_path(todo.id), method: :post do %>
+          <input type="text" id="fname" name="name" value="<%=todo.name%>">
+          <%=link_to 'eliminar', todo_path(todo), method: :delete%>
+          <%=todo.may_second? ? (link_to 'ready!', second_todo_path(todo.id), method: :put) : (link_to 'not ready!', first_todo_path(todo.id), method: :put)%>
+          <%= submit_tag("Actualizar") %>
+        <% end %>
+        
+      </ul>
+  <%end%>
+</div>
