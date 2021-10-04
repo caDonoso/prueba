@@ -1,8 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+# Gem for authentication
 gem 'devise'
 
+# Gem for models state controls
 gem 'aasm'
 
 ruby '3.0.0'
